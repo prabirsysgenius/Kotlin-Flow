@@ -1,0 +1,44 @@
+1). What is streams in Kotlin Flow?
+Answer:- In Kotlin Flow, a stream refers to an asynchronous sequence of values that are emitted over time. Flow is Kotlin’s way of handling asynchronous data streams in a structured and coroutine-friendly way.
+It’s similar to how RxJava handles streams, but Flow is cold, suspendable, and cancelable by design. A stream in Kotlin Flow is represented by the Flow<T> type, where T is the type of data being emitted.
+For example, a stream can emit items from a network call, a database, or user interactions, one by one, and the consumer collects these emissions using the collect() function.
+
+2) How to cancel kotlin flow?
+Answer:- To cancel the flow we does not have any "method".
+-> if does not have nay consumer the flow is automatically cancel.
+-> we are using coroutines so we have structured concurrency - if our coroutine is cancel the consumer has been removed, if consumer
+ is removed the flow is automatically cancel.
+ Note:- (structured concurrency - Structured concurrency is a programming approach that enhances concurrent code by managing
+ the relationships between tasks and subtasks, leading to more readable, maintainable, and reliable programs).
+
+          val job = GlobalScope.launch {
+             //Todo: this code is our consumer
+             val data:Flow<Int> =  producer()
+             data.collect{
+                 Log.e(TAG, "COLLECT "+it.toString())
+             }
+         }
+
+         GlobalScope.launch {
+             delay(3500)
+             job.cancel() << We are cancel the flow after 3 sec 5 ms by canceling the coroutine
+         }
+
+ -> We can have multiple consumer:
+                GlobalScope.launch {
+                    //Todo: this code is our consumer
+                    val data:Flow<Int> =  producer()
+                    data.collect{
+                        Log.e(TAG, "COLLECT - 1: "+it.toString())
+                    }
+                }
+
+                GlobalScope.launch {
+                    //Todo: this code is our consumer
+                    val data:Flow<Int> =  producer()
+                    delay(2500)             << Start 2 sec 5 ms
+                    data.collect{
+                        Log.e(TAG, "COLLECT - 2: "+it.toString())
+                    }
+                }
+
