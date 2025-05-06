@@ -13,7 +13,13 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -39,19 +45,42 @@ class MainActivity : AppCompatActivity() {
         //consumer()
          GlobalScope.launch {
             //Todo: this code is our consumer
-            val data:Flow<Int> =  producer()
+           /* val data:Flow<Int> =  producer()
             data.collect{
                 Log.e(TAG, "COLLECT - 1: "+it.toString())
-            }
+            }*/
+             producer()
+                 .onStart {
+                     emit(0) // "emit()" - method is used manually,here we  emit - ZERO manually
+                     Log.d(TAG, "onStart: called");
+                 }.onCompletion {
+                     emit(-11) // "emit()" - method is used manually,here we  emit - -11 manually
+                     Log.d(TAG, "onCompletion: called");
+                 }.onEach {
+                     Log.d(TAG, "onEach: About to emit - this is called when an item is emit");
+                 }.collect{
+                     Log.d(TAG, "collect data: ${it}")
+                 }
+             /**
+              *  In a Flow we have two types of operator - 1) terminal operator, 2) Non-terminal operator
+              *  1) Terminal operator - are start our flow, meanse conjumtion of Flow is happen for  Terminal operator
+              *   for example:  "collect" is a Terminal operator
+              * */
+             val result = producer().first() // first() - is used to pick first element of our flow.
+             Log.d(TAG, "first(): the first element is: "+result)
+             val list = producer().toList() // toList() - it convert our flow in a list
+             Log.d(TAG, "list: "+list)
+
         }
 
         GlobalScope.launch {
-            //Todo: this code is our consumer
-            val data:Flow<Int> =  producer()
-            delay(2500)
-            data.collect{
-                Log.e(TAG, "COLLECT - 2: "+it.toString())
-            }
+            producer()
+                .map {
+                    // map - operator is help to map one object to another object
+                }
+                .collect{
+
+                }
         }
 
     }
