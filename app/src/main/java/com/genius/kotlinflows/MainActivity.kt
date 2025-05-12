@@ -1,11 +1,13 @@
 package com.genius.kotlinflows
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.genius.kotlinflows.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -13,6 +15,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -24,15 +27,21 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "Kotlin_Flows"
+    lateinit var binding: ActivityMainBinding
     val channel = Channel<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        binding.btnSecond.setOnClickListener {
+            val intent = Intent(MainAcitvity@this, SecondActivity::class.java)
+            startActivity(intent)
         }
 
         /*CoroutineScope(Dispatchers.Main).launch{
@@ -77,9 +86,12 @@ class MainActivity : AppCompatActivity() {
             producer()
                 .map {
                     // map - operator is help to map one object to another object
+                    it * 2
                 }
-                .collect{
-
+                .filter {
+                    it < 8
+                }.collect{
+                    Log.e(TAG, "FLOW: "+it.toString())
                 }
         }
 
