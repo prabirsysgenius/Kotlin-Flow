@@ -43,7 +43,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(MainAcitvity@this, SecondActivity::class.java)
             startActivity(intent)
         }
-
+        binding.btnBuffering.setOnClickListener{
+            val intent = Intent(MainAcitvity@this, BufferingActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnFlowOn.setOnClickListener{
+            val intent = Intent(MainAcitvity@this, FlowOnActivity::class.java)
+            startActivity(intent)
+        }
         /*CoroutineScope(Dispatchers.Main).launch{
             //TODO: First
             getUserNames().forEach {
