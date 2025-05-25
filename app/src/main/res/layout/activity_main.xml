@@ -35,6 +35,22 @@
             android:layout_height="wrap_content"
             android:text="FlowOn"/>
 
+        <Button
+            android:id="@+id/btnException"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exception Handling"/>
+
+        <Button
+            android:id="@+id/btnMutableSharedFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mutable Shared Flow"/>
+        <Button
+            android:id="@+id/btnStateFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State Flow"/>
     </LinearLayout>
 
 

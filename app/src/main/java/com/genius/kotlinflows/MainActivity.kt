@@ -51,6 +51,18 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(MainAcitvity@this, FlowOnActivity::class.java)
             startActivity(intent)
         }
+        binding.btnException.setOnClickListener{
+            val intent = Intent(MainAcitvity@this, ExceptionHandlingActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnMutableSharedFlow.setOnClickListener{
+            val intent = Intent(MainAcitvity@this, MutableSharedFlowActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnStateFlow.setOnClickListener{
+            val intent = Intent(MainAcitvity@this, StateFlowActivity::class.java)
+            startActivity(intent)
+        }
         /*CoroutineScope(Dispatchers.Main).launch{
             //TODO: First
             getUserNames().forEach {
