@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     val channel = Channel<Int>()
 
     // Hello testing
+    // TODO: Testing - 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
