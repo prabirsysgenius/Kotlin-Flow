@@ -7,13 +7,51 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnSecond"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to Second Activity"
+        android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btnSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go to Second Activity"/>
+
+        <Button
+            android:id="@+id/btnBuffering"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buffering"/>
+
+        <Button
+            android:id="@+id/btnFlowOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FlowOn"/>
+
+        <Button
+            android:id="@+id/btnException"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exception Handling"/>
+
+        <Button
+            android:id="@+id/btnMutableSharedFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mutable Shared Flow"/>
+        <Button
+            android:id="@+id/btnStateFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State Flow"/>
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

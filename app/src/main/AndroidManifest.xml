@@ -13,6 +13,18 @@
         android:theme="@style/Theme.KotlinFlows"
         tools:targetApi="31">
         <activity
+            android:name=".StateFlowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MutableSharedFlowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExceptionHandlingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FlowOnActivity"
+            android:exported="false" />
+        <activity
             android:name=".BufferingActivity"
             android:exported="false" />
         <activity
