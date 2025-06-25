@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "Kotlin_Flows"
     lateinit var binding: ActivityMainBinding
     val channel = Channel<Int>()
+
+    // Hello testing
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
